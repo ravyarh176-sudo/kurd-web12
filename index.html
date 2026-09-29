@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta
+    name="description"
+    content="StoreAI - دروستکردنی فرۆشگای آنلاین بە زیرەکی دەستکرد"
+  />
+
+  <title>StoreAI — AI Store Builder</title>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- ================= APP ================= -->
+
+  <div id="app">
+
+    <!-- ================= AUTH SCREEN ================= -->
+
+    <section id="authScreen" class="screen auth-screen">
+
+      <div class="auth-glow glow-a"></div>
+      <div class="auth-glow glow-b"></div>
+
+      <div class="auth-container">
+
+        <div class="brand-large">
+          <div class="brand-mark">✦</div>
+
+          <div>
+            <strong>StoreAI</strong>
+            <span>AI Store Builder</span>
+          </div>
+        </div>
+
+        <div class="auth-card">
+
+          <div class="auth-icon">
+            ✦
+          </div>
+
+          <h1>
+            فرۆشگای خەونەکانت دروست بکە
+          </h1>
+
+          <p>
+            تەنها بیرۆکەکەت بنووسە،
+            ئێمە کۆد و دیزاینەکەی بۆت دروست دەکەین.
+          </p>
+
+          <!-- Google button will be connected to backend -->
+          <button
+            id="googleLoginButton"
+            class="google-login"
+            type="button"
+          >
+            <span class="google-logo">G</span>
+
+            <span>
+              بە Google بچۆ ژوورەوە
+            </span>
+
+            <span class="login-arrow">←</span>
+          </button>
+
+          <div class="auth-divider">
+            <span>یان</span>
+          </div>
+
+          <div class="auth-benefits">
+
+            <div>
+              <span>✓</span>
+              ئەکاونتی خۆت دروست دەکەیت
+            </div>
+
+            <div>
+              <span>✓</span>
+              پڕۆژەکانت هەمیشە هەڵدەگیرێن
+            </div>
+
+            <div>
+              <span>✓</span>
+              هیچ کۆدێکت پێویست نییە
+            </div>
+
+          </div>
+
+          <small class="auth-note">
+            بە بەردەوامبوون ڕازیت بە مەرجەکانی بەکارهێنان
+            و سیاسەتی پاراستنی نهێنی.
+          </small>
+
+        </div>
+
+        <div class="auth-footer">
+          <span>🔒</span>
+          داتاکانت بە شێوەی پارێزراو هەڵدەگیرێن
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================= MAIN APP ================= -->
+
+    <section id="mainApp" class="screen hidden">
+
+      <!-- TOP BAR -->
+
+      <header class="topbar">
+
+        <button
+          id="mobileMenuButton"
+          class="icon-button"
+          type="button"
+          aria-label="Menu"
+        >
+          ☰
+        </button>
+
+        <div class="topbar-brand">
+
+          <div class="brand-mark small">
+            ✦
+          </div>
+
+          <div class="topbar-brand-text">
+            <strong>StoreAI</strong>
+            <span>AI Builder</span>
+          </div>
+
+        </div>
+
+        <div class="topbar-actions">
+
+          <button
+            id="themeButton"
+            class="icon-button"
+            type="button"
+            aria-label="Theme"
+          >
+            ☼
+          </button>
+
+          <button
+            id="notificationButton"
+            class="icon-button notification"
+            type="button"
+          >
+            ♢
+            <span></span>
+          </button>
+
+          <button
+            id="profileButton"
+            class="profile-button"
+            type="button"
+          >
+            <div class="avatar" id="userAvatar">
+              R
+            </div>
+
+            <div class="profile-text">
+              <strong id="userName">
+                بەکارهێنەر
+              </strong>
+
+              <span id="userEmail">
+                user@example.com
+              </span>
+            </div>
+
+            <span>⌄</span>
+          </button>
+
+        </div>
+
+      </header>
+
+
+      <!-- ================= LAYOUT ================= -->
+
+      <div class="app-layout">
+
+        <!-- SIDEBAR -->
+
+        <aside id="sidebar" class="sidebar">
+
+          <div class="sidebar-user">
+
+            <div class="avatar large" id="sidebarAvatar">
+              R
+            </div>
+
+            <div>
+              <strong id="sidebarUserName">
+                بەکارهێنەر
+              </strong>
+
+              <span>
+                Store Owner
+              </span>
+            </div>
+
+          </div>
+
+
+          <nav class="sidebar-nav">
+
+            <button
+              class="nav-item active"
+              data-page="builder"
+            >
+              <span>✦</span>
+              AI Builder
+            </button>
+
+            <button
+              class="nav-item"
+              data-page="projects"
+            >
+              <span>▣</span>
+              پڕۆژەکانم
+            </button>
+
+            <button
+              class="nav-item"
+              data-page="activity"
+            >
+              <span>◷</span>
+              چالاکییەکان
+            </button>
+
+            <div class="nav-separator"></div>
+
+            <button
+              class="nav-item"
+              data-page="settings"
+            >
+              <span>⚙</span>
+              ڕێکخستنەکان
+            </button>
+
+          </nav>
+
+
+          <div class="sidebar-bottom">
+
+            <div class="connection-mini">
+
+              <div class="connection-icon">
+                ◉
+              </div>
+
+              <div>
+                <strong>Services</strong>
+                <span id="connectionStatus">
+                  پەیوەندی نەکراوە
+                </span>
+              </div>
+
+            </div>
+
+            <button
+              id="logoutButton"
+              class="logout-button"
+              type="button"
+            >
+              <span>↪</span>
+              دەرچوون
+            </button>
+
+          </div>
+
+        </aside>
+
+
+        <!-- ================= CONTENT ================= -->
+
+        <main class="content">
+
+          <!-- ===== BUILDER PAGE ===== -->
+
+          <section
+            id="builderPage"
+            class="page active"
+          >
+
+            <div class="page-header">
+
+              <div>
+
+                <div class="eyebrow">
+                  ✦ AI POWERED
+                </div>
+
+                <h1>
+                  بیرۆکەکەت بکە بە
+                  <span>فرۆشگای آنلاین</span>
+                </h1>
+
+                <p>
+                  بە زمانی خۆت باس بکە چ فرۆشگایەکت دەوێت.
+                  هیچ کۆدێک پێویست نییە.
+                </p>
+
+              </div>
+
+              <div class="page-header-actions">
+
+                <div class="secure-pill">
+                  <span></span>
+                  Secure Workspace
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- BUILDER GRID -->
+
+            <div class="builder-grid">
+
+              <!-- PROMPT PANEL -->
+
+              <div class="panel builder-panel">
+
+                <div class="panel-header">
+
+                  <div class="panel-title">
+
+                    <div class="panel-icon purple">
+                      ✦
+                    </div>
+
+                    <div>
+                      <strong>
+                        AI Store Builder
+                      </strong>
+
+                      <span>
+                        وەسفی فرۆشگاکەت بنووسە
+                      </span>
+                    </div>
+
+                  </div>
+
+                  <div class="ai-status">
+                    <span></span>
+                    Ready
+                  </div>
+
+                </div>
+
+
+                <div class="prompt-area">
+
+                  <label for="storePrompt">
+                    چی دەتەوێت دروست بکەین؟
+                  </label>
+
+                  <textarea
+                    id="storePrompt"
+                    maxlength="2000"
+                    placeholder="نموونە:
+
+فرۆشگای جل و بەرگێکی مۆدێرن دروست بکە.
+٨ بەرهەم هەبێت.
+ڕەنگی سەرەکی شین بێت.
+Dark theme بێت.
+کارت و checkout ـی سادەی هەبێت..."
+                  ></textarea>
+
+                  <div class="prompt-meta">
+
+                    <div class="language-list">
+                      <span>کوردی</span>
+                      <span>العربية</span>
+                      <span>English</span>
+                    </div>
+
+                    <span id="characterCount">
+                      0 / 2000
+                    </span>
+
+                  </div>
+
+                </div>
+
+
+                <!-- QUICK IDEAS -->
+
+                <div class="quick-section">
+
+                  <div class="quick-title">
+                    <span>⚡</span>
+                    بیرۆکەی خێرا
+                  </div>
+
+                  <div class="quick-grid">
+
+                    <button
+                      class="quick-card"
+                      data-prompt="فرۆشگای جل و بەرگی مۆدێرن دروست بکە، ٨ بەرهەم، dark theme، دیزاینی premium و کارت و checkout."
+                    >
+                      <span>👕</span>
+                      <strong>Fashion Store</strong>
+                    </button>
+
+                    <button
+                      class="quick-card"
+                      data-prompt="فرۆشگای ئەلیکترۆنیات دروست بکە، ١٠ بەرهەم، دیزاینی clean و modern."
+                    >
+                      <span>📱</span>
+                      <strong>Electronics</strong>
+                    </button>
+
+                    <button
+                      class="quick-card"
+                      data-prompt="فرۆشگای قاوە و خواردنەوە دروست بکە، ٩ بەرهەم، دیزاینی گەرم و جوان."
+                    >
+                      <span>☕</span>
+                      <strong>Coffee Shop</strong>
+                    </button>
+
+                    <button
+                      class="quick-card"
+                      data-prompt="فرۆشگای جوانکاری و skincare دروست بکە، ١٢ بەرهەم، دیزاینی luxury."
+                    >
+                      <span>✨</span>
+                      <strong>Beauty Store</strong>
+                    </button>
+
+                  </div>
+
+                </div>
+
+
+                <button
+                  id="generateButton"
+                  class="generate-button"
+                  type="button"
+                >
+                  <span class="sparkle">✦</span>
+
+                  <span>
+                    دروستکردنی فرۆشگا
+                  </span>
+
+                  <span class="generate-arrow">
+                    ←
+                  </span>
+                </button>
+
+
+                <div class="privacy-note">
+                  <span>🔒</span>
+
+                  <span>
+                    هیچ شتێک بڵاوناکرێتەوە تا خۆت
+                    Publish ـی نەکەیت.
+                  </span>
+                </div>
+
+              </div>
+
+
+              <!-- PREVIEW PANEL -->
+
+              <div class="panel preview-panel">
+
+                <div class="panel-header">
+
+                  <div class="panel-title">
+
+                    <div class="panel-icon blue">
+                      ◈
+                    </div>
+
+                    <div>
+                      <strong>
+                        Live Preview
+                      </strong>
+
+                      <span>
+                        پێشبینینی فرۆشگاکەت
+                      </span>
+                    </div>
+
+                  </div>
+
+                  <div class="preview-tools">
+
+                    <button
+                      class="preview-device active"
+                      data-device="mobile"
+                    >
+                      ▯
+                    </button>
+
+                    <button
+                      class="preview-device"
+                      data-device="desktop"
+                    >
+                      ▱
+                    </button>
+
+                  </div>
+
+                </div>
+
+
+                <div class="browser">
+
+                  <div class="browser-top">
+
+                    <div class="browser-dots">
+                      <i></i>
+                      <i></i>
+                      <i></i>
+                    </div>
+
+                    <div class="browser-address">
+                      <span>⌕</span>
+                      preview.storeai.app
+                    </div>
+
+                  </div>
+
+
+                  <div
+                    id="previewBody"
+                    class="preview-body"
+                  >
+
+                    <div class="preview-empty">
+
+                      <div class="preview-sparkle">
+                        ✦
+                      </div>
+
+                      <h3>
+                        ئامادەی دروستکردنی فرۆشگاکەتین
+                      </h3>
+
+                      <p>
+                        وەسفی فرۆشگاکەت لە لای چەپ بنووسە
+                        و دوگمەی دروستکردن دابگرە.
+                      </p>
+
+                      <div class="preview-placeholder-grid">
+
+                        <div></div>
+                        <div></div>
+                        <div></div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- TRUST FEATURES -->
+
+            <div class="trust-grid">
+
+              <div class="trust-card">
+
+                <span>🤖</span>
+
+                <div>
+                  <strong>
+                    AI Code Generation
+                  </strong>
+
+                  <p>
+                    کۆدی پاک و responsive
+                  </p>
+                </div>
+
+              </div>
+
+              <div class="trust-card">
+
+                <span>🛡️</span>
+
+                <div>
+                  <strong>
+                    Secure by Design
+                  </strong>
+
+                  <p>
+                    هیچ secret ـێک لە frontend نییە
+                  </p>
+                </div>
+
+              </div>
+
+              <div class="trust-card">
+
+                <span>📱</span>
+
+                <div>
+                  <strong>
+                    Mobile First
+                  </strong>
+
+                  <p>
+                    بۆ هەموو قەبارەکانی مۆبایل
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- ===== PROJECTS PAGE ===== -->
+
+          <section
+            id="projectsPage"
+            class="page hidden"
+          >
+
+            <div class="page-header">
+
+              <div>
+
+                <div class="eyebrow">
+                  YOUR WORKSPACE
+                </div>
+
+                <h1>
+                  پڕۆژەکانم
+                </h1>
+
+                <p>
+                  هەموو فرۆشگا و پڕۆژەکانت لێرە بەڕێوەبەرە.
+                </p>
+
+              </div>
+
+              <button
+                class="primary-button"
+                data-page="builder"
+              >
+                + پڕۆژەی نوێ
+              </button>
+
+            </div>
+
+
+            <div class="project-empty">
+
+              <div>
+                ✦
+              </div>
+
+              <h2>
+                هێشتا پڕۆژەیەکت نییە
+              </h2>
+
+              <p>
+                یەکەم فرۆشگاکەت بە AI دروست بکە.
+              </p>
+
+              <button
+                class="primary-button"
+                data-page="builder"
+              >
+                دەست پێ بکە
+              </button>
+
+            </div>
+
+          </section>
+
+
+          <!-- ===== ACTIVITY PAGE ===== -->
+
+          <section
+            id="activityPage"
+            class="page hidden"
+          >
+
+            <div class="page-header">
+
+              <div>
+
+                <div class="eyebrow">
+                  ACTIVITY
+                </div>
+
+                <h1>
+                  چالاکییەکان
+                </h1>
+
+                <p>
+                  دوایین کارەکانت لە StoreAI.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="activity-card">
+
+              <div class="activity-item">
+
+                <span class="activity-icon green">
+                  ✓
+                </span>
+
+                <div>
+                  <strong>
+                    ئەکاونت دروست کرا
+                  </strong>
+
+                  <small>
+                    ئێستا
+                  </small>
+                </div>
+
+              </div>
+
+              <div class="activity-item">
+
+                <span class="activity-icon purple">
+                  ✦
+                </span>
+
+                <div>
+                  <strong>
+                    بەخێرهاتیت بۆ StoreAI
+                  </strong>
+
+                  <small>
+                    ئێستا
+                  </small>
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- ===== SETTINGS PAGE ===== -->
+
+          <section
+            id="settingsPage"
+            class="page hidden"
+          >
+
+            <div class="page-header">
+
+              <div>
+
+                <div class="eyebrow">
+                  SETTINGS
+                </div>
+
+                <h1>
+                  ڕێکخستنەکان
+                </h1>
+
+                <p>
+                  زانیاری و ڕێکخستنەکانی ئەکاونتەکەت.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="settings-card">
+
+              <div class="setting-row">
+
+                <div>
+
+                  <strong>
+                    ئەکاونتی Google
+                  </strong>
+
+                  <span id="settingsEmail">
+                    پەیوەندی نەکراوە
+                  </span>
+
+                </div>
+
+                <span class="connected-badge">
+                  Connected
+                </span>
+
+              </div>
+
+
+              <div class="setting-row">
+
+                <div>
+
+                  <strong>
+                    Supabase
+                  </strong>
+
+                  <span>
+                    Database ـی فرۆشگاکەت
+                  </span>
+
+                </div>
+
+                <button class="secondary-button">
+                  Connect
+                </button>
+
+              </div>
+
+
+              <div class="setting-row">
+
+                <div>
+
+                  <strong>
+                    Netlify
+                  </strong>
+
+                  <span>
+                    بڵاوکردنەوەی فرۆشگاکەت
+                  </span>
+
+                </div>
+
+                <button class="secondary-button">
+                  Connect
+                </button>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- ===== ADMIN PAGE ===== -->
+
+          <section
+            id="adminPage"
+            class="page hidden"
+          >
+
+            <div class="page-header">
+
+              <div>
+
+                <div class="eyebrow admin-eyebrow">
+                  ADMIN CONTROL CENTER
+                </div>
+
+                <h1>
+                  بەڕێوەبردنی StoreAI
+                </h1>
+
+                <p>
+                  چاودێری بەکارهێنەران، پڕۆژەکان و چالاکییەکان.
+                </p>
+
+              </div>
+
+              <div class="admin-badge">
+                👑 Administrator
+              </div>
+
+            </div>
+
+
+            <!-- STATISTICS -->
+
+            <div class="stats-grid">
+
+              <div class="stat-card">
+
+                <div class="stat-icon purple">
+                  👥
+                </div>
+
+                <span>
+                  کۆی بەکارهێنەران
+                </span>
+
+                <strong id="totalUsers">
+                  0
+                </strong>
+
+                <small>
+                  Accounts
+                </small>
+
+              </div>
+
+
+              <div class="stat-card">
+
+                <div class="stat-icon green">
+                  ●
+                </div>
+
+                <span>
+                  ئێستا Online
+                </span>
+
+                <strong id="onlineUsers">
+                  0
+                </strong>
+
+                <small>
+                  Active now
+                </small>
+
+              </div>
+
+
+              <div class="stat-card">
+
+                <div class="stat-icon blue">
+                  ◫
+                </div>
+
+                <span>
+                  پڕۆژەکان
+                </span>
+
+                <strong id="totalProjects">
+                  0
+                </strong>
+
+                <small>
+                  Stores
+                </small>
+
+              </div>
+
+
+              <div class="stat-card">
+
+                <div class="stat-icon orange">
+                  ✦
+                </div>
+
+                <span>
+                  AI Requests
+                </span>
+
+                <strong id="aiRequests">
+                  0
+                </strong>
+
+                <small>
+                  This period
+                </small>
+
+              </div>
+
+            </div>
+
+
+            <!-- ADMIN SECTIONS -->
+
+            <div class="admin-grid">
+
+              <div class="panel admin-panel">
+
+                <div class="panel-header">
+
+                  <div class="panel-title">
+
+                    <div class="panel-icon purple">
+                      👥
+                    </div>
+
+                    <div>
+                      <strong>
+                        دوایین بەکارهێنەران
+                      </strong>
+
+                      <span>
+                        Users
+                      </span>
+                    </div>
+
+                  </div>
+
+                  <button class="text-button">
+                    هەموویان ببینە ←
+                  </button>
+
+                </div>
+
+
+                <div
+                  id="adminUsersList"
+                  class="admin-list"
+                >
+
+                  <div class="admin-empty">
+                    هێشتا بەکارهێنەر نییە.
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <div class="panel admin-panel">
+
+                <div class="panel-header">
+
+                  <div class="panel-title">
+
+                    <div class="panel-icon orange">
+                      ⚠
+                    </div>
+
+                    <div>
+                      <strong>
+                        AI Review Queue
+                      </strong>
+
+                      <span>
+                        داواکارییە پێویست بە پشکنینەکان
+                      </span>
+                    </div>
+
+                  </div>
+
+                  <span class="queue-count">
+                    0
+                  </span>
+
+                </div>
+
+
+                <div class="admin-empty">
+
+                  <div class="empty-check">
+                    ✓
+                  </div>
+
+                  <strong>
+                    هیچ داواکارییەکی پێویست بە review نییە
+                  </strong>
+
+                  <span>
+                    سیستەمەکە ئامادەیە.
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- ADMIN NOTICE -->
+
+            <div class="admin-security-notice">
+
+              <div class="notice-icon">
+                🛡️
+              </div>
+
+              <div>
+
+                <strong>
+                  Security & Privacy
+                </strong>
+
+                <p>
+                  تەنها زانیارییەکانی پێویست بۆ بەڕێوەبردنی
+                  پلاتفۆرم و moderation لێرە دەردەکەون.
+                  secret ـەکانی بەکارهێنەران هەرگیز لە Admin UI نادرێن.
+                </p>
+
+              </div>
+
+            </div>
+
+          </section>
+
+        </main>
+
+      </div>
+
+    </section>
+
+  </div>
+
+
+  <!-- ================= TOAST ================= -->
+
+  <div
+    id="toast"
+    class="toast"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+
+  <script src="app.js"></script>
+
+</body>
+</html>
+
+ئەم فایلە UI ـی بنەڕەتیی تەواوی Phase 1 ـە؛ Google button ـەکە ئێستا placeholder ـە، چونکە Google token دەبێت لە backend پشتڕاست بکرێتەوە، نەک تەنها بە JavaScript ـی browser. Google بۆ ئەم flow ـە server-side handling و verification ـی ID token باس دەکات.
+
+لە هەنگاوی دواتر "styles.css" دەدەم و هەموو ئەم UI ـە بە دیزاینی واقعی، animation، responsive mobile/desktop و dark/light دەکەین؛ پاشان "app.js" کە navigation، Google-state، builder، preview و Admin data ـی test بەڕێوە دەبات.
